@@ -1,0 +1,22 @@
+{
+  "entries": {
+    "mas": {
+      "Magnet": {
+        "id": "441258766",
+        "version": "2.4.6"
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "catalina": {
+        "HOMEBREW_VERSION": "2.4.8",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "44d184d664d94373a7e8153bf83176da3fd08ac5",
+        "CLT": "11.5.0.0.1.1588476445",
+        "Xcode": "11.6",
+        "macOS": "10.15.6"
+      }
+    }
+  }
+}
