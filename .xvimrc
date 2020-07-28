@@ -1,0 +1,10 @@
+imap jk <Esc>
+imap kj <Esc>
+imap jj <Esc>
+imap kk <Esc>
+
+map <C-k> 5k
+map <C-j> 5j
+
+map <C-K> 10k
+map <C-J> 10j

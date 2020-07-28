@@ -3,6 +3,7 @@ tap "homebrew/cask"
 tap "homebrew/core"
 brew "autojump"
 brew "mas"
+cask "contexts"
 cask "fork"
 cask "google-chrome"
 cask "iterm2"
@@ -13,3 +14,4 @@ cask "visual-studio-code"
 cask "zoomus"
 mas "Magnet", id: 441258766
 mas "Xcode", id: 497799835
+mas "截图", id: 1059334054

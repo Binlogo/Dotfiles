@@ -1,3 +1,4 @@
+cask "contexts"
 cask "fork"
 cask "google-chrome"
 cask "iterm2"
