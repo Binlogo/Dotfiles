@@ -1,8 +1,15 @@
 tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
+tap "homebrew/cask", "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git"
+tap "homebrew/core", "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+
 brew "autojump"
 brew "mas"
+brew "neovim"
+brew "zsh"
+brew "zsh-completions
+brew "zsh-autosuggestions"
+brew "git"
+
 cask "contexts"
 cask "fork"
 cask "google-chrome"
@@ -12,6 +19,8 @@ cask "ticktick"
 cask "typora"
 cask "visual-studio-code"
 cask "zoomus"
+cask "alfred"
+
 mas "Magnet", id: 441258766
 mas "Xcode", id: 497799835
 mas "截图", id: 1059334054

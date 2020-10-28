@@ -1,3 +1,7 @@
 brew "autojump"
 brew "mas"
 brew "neovim"
+brew "zsh"
+brew "zsh-completions
+brew "zsh-autosuggestions"
+brew "git"
