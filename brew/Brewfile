@@ -9,6 +9,7 @@ brew "zsh"
 brew "zsh-completions
 brew "zsh-autosuggestions"
 brew "git"
+brew "tree"
 
 cask "contexts"
 cask "fork"
