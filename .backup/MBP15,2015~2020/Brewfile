@@ -1,0 +1,116 @@
+tap "getantibody/tap"
+tap "github/gh"
+tap "homebrew/bundle"
+tap "homebrew/cask", "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git"
+tap "homebrew/core", "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+tap "kylef/formulae"
+tap "mas-cli/tap"
+tap "trojan-gfw/trojan"
+tap "vapor/tap"
+brew "aria2"
+brew "docbook"
+brew "boost"
+brew "source-highlight"
+brew "asciidoc"
+brew "autoconf"
+brew "autojump"
+brew "automake"
+brew "bartycrouch"
+brew "carthage"
+brew "cmake"
+brew "cocoapods", link: false
+brew "coreutils"
+brew "libksba"
+brew "pth"
+brew "dirmngr", link: true
+brew "exa"
+brew "exercism"
+brew "findutils"
+brew "flow"
+brew "gcc@4.9"
+brew "git"
+brew "readline"
+brew "libtool"
+brew "libxml2"
+brew "libimobiledevice", args: ["HEAD"]
+brew "ideviceinstaller"
+brew "ios-deploy"
+brew "ldid"
+brew "libiconv"
+brew "libusb-compat"
+brew "libxslt"
+brew "libyaml"
+brew "neovim"
+brew "ninja"
+brew "node", link: false
+brew "nvm"
+brew "octave"
+brew "openssl@1.1"
+brew "pkg-config"
+brew "polipo"
+brew "postgresql"
+brew "protobuf"
+brew "redis"
+brew "rtmp-nginx-module"
+brew "scc"
+brew "swiftlint"
+brew "swiftplate"
+brew "tree"
+brew "watchman"
+brew "wget"
+brew "zlib"
+brew "zsh-syntax-highlighting"
+brew "github/gh/gh"
+brew "kylef/formulae/swiftenv"
+brew "mas-cli/tap/mas"
+brew "trojan-gfw/trojan/trojan"
+cask "basictex"
+cask "betterzipql"
+cask "docker"
+cask "google-chrome"
+cask "kap"
+cask "latest"
+cask "openinterminal"
+cask "provisionql"
+cask "qlcolorcode"
+cask "qlimagesize"
+cask "qlmarkdown"
+cask "qlstephen"
+cask "qlvideo"
+cask "quicklook-json"
+cask "quicklookapk"
+cask "swimat"
+cask "webpquicklook"
+mas "Amphetamine", id: 937984704
+mas "Annotate", id: 918207447
+mas "App Icon Gear", id: 989646576
+mas "BeyondPlayer Lite", id: 1444389594
+mas "Cleaner for Xcode", id: 1296084683
+mas "CuteBaby", id: 1262352477
+mas "Day One", id: 1055511498
+mas "Dynamo", id: 1445910651
+mas "iMate", id: 1225021443
+mas "iText", id: 1314980676
+mas "Keynote 讲演", id: 409183694
+mas "Magnet", id: 441258766
+mas "Numbers 表格", id: 409203825
+mas "Pages 文稿", id: 409201541
+mas "Playgrounds", id: 1496833156
+mas "Realm Browser", id: 1007457278
+mas "Reeder", id: 880001334
+mas "Skitch", id: 425955336
+mas "Slack", id: 803453959
+mas "SmartBaby", id: 1438971945
+mas "SnippetsLab", id: 1006087419
+mas "The Unarchiver", id: 425424353
+mas "Trello", id: 1278508951
+mas "VOX", id: 461369673
+mas "Winds", id: 1381446741
+mas "XCFormat", id: 1165321484
+mas "Xcode", id: 497799835
+mas "休息一下", id: 1457158844
+mas "开发者", id: 640199958
+mas "微信", id: 836500024
+mas "截图", id: 1059334054
+mas "滴答清单", id: 966085870
+mas "熊掌记", id: 1091189122

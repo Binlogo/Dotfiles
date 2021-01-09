@@ -1,0 +1,66 @@
+MBP 应用程序列表备忘
+
+滴答清单
+多少
+股市
+截图
+幕布
+休息一下
+Adobe Creative Cloud
+Adobe Photoshop CC 2015
+Alfred 4
+Amphetamine
+Annotate
+App Icon Gear
+App Store
+BeyondPlayer Lite
+calibre
+Charles
+CheatSheet
+Choosy
+ClashX
+Cleaner for Xcode
+CleanMyMac X
+Contexts
+CustomShortcuts
+Day One
+FaceTime通话
+Firefox
+FontTools
+Fork
+Google Chrome
+Gridea
+iMate
+iStat Menus
+iTerm
+iText
+Karabiner-Elements
+Karabiner-EventViewer
+Keynote 讲演
+Latest
+Magnet
+NetNewsWire
+One Switch
+OpenInTerminal
+Pages 文稿
+Paw
+PDF Expert
+pgAdmin 4
+Photo Booth
+QQ音乐
+QuickTime Player
+Safari浏览器
+Shadowsocks
+Ship
+Siri
+SmartBaby
+SnippetsLab
+Spark
+The Unarchiver
+TinkerTool
+trojan-qt5
+Typora
+Unity
+Visual Studio Code
+VLC
+Xcode
