@@ -1,9 +1,9 @@
 brew "autojump"
 brew "mas"
 brew "neovim"
-brew "zsh"
-brew "zsh-completions
-brew "zsh-autosuggestions"
+brew "fish"
 brew "git"
 brew "tree"
+brew "bat"
+brew "exa"
 brew "tokei"

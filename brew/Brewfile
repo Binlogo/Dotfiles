@@ -5,11 +5,11 @@ tap "homebrew/core", "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew
 brew "autojump"
 brew "mas"
 brew "neovim"
-brew "zsh"
-brew "zsh-completions
-brew "zsh-autosuggestions"
+brew "fish"
 brew "git"
 brew "tree"
+brew "bat"
+brew "exa"
 
 cask "contexts"
 cask "fork"
