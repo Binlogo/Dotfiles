@@ -2,6 +2,14 @@
 
 Build my macOS
 
+## Location Notes
+
+  - `fish` - `~/.config/fish` folder
+  - `git` - `~/.gitconfig`
+  - `vim` - `~/.vimrc` and the `~/.vim` folder
+  - `ssh` - `~/.ssh/config`
+  - `tmux` - `~/.tmux.conf`
+
 ## Install Homebrew
 
 ```sh
