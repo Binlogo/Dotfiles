@@ -3,7 +3,7 @@
 [fish.files]
 fish = "~/.config/fish"
 
-[default]
-depends = ["fish"]
+[nvim.files]
+nvim = "~/.config/nvim"
 
 
