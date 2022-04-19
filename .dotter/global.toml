@@ -1,0 +1,9 @@
+[helpers]
+
+[fish.files]
+fish = "~/.config/fish"
+
+[default]
+depends = ["fish"]
+
+
