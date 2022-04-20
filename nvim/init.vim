@@ -30,3 +30,6 @@ call plug#end()
 " # Editor settings
 " =============================================================================
 set noshowmode
+if has('nvim')
+  au TextYankPost * silent! lua vim.highlight.on_yank()
+end
