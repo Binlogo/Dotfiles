@@ -18,6 +18,7 @@ Plug 'justinmk/vim-sneak'
 
 " GUI enhancement
 Plug 'itchyny/lightline.vim'
+Plug 'andymass/vim-matchup'
 
 " Language & LSP
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
