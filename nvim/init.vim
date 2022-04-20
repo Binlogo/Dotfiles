@@ -11,6 +11,7 @@ call plug#begin()
 
 " Vim enhancement
 Plug 'editorconfig/editorconfig-vim'
+Plug 'justinmk/vim-sneak'
 
 " GUI enhancement
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
