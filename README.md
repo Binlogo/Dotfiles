@@ -28,5 +28,7 @@ Build my macOS
 
 # Inspirations
 
+- [jonhoo/configs](https://github.com/jonhoo/configs)
+- [junegunn/dotfiles](https://github.com/junegunn/dotfiles)
 - [sam-hosseini/dotfiles](https://github.com/sam-hosseini/dotfiles)
 - [Dotfiles: GitHub ❤ ~/](https://dotfiles.github.io/)
