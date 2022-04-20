@@ -1,4 +1,6 @@
 
+let mapleader = "\<Space>"
+
 call plug#begin()
 
 Plug 'neovim/nvim-lspconfig'
