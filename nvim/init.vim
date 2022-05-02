@@ -45,6 +45,7 @@ Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
 Plug 'plasticboy/vim-markdown'
+Plug 'dag/vim-fish'
 
 call plug#end()
 
@@ -58,6 +59,10 @@ if has('nvim')
     set inccommand=nosplit
     noremap <C-q> :confirm qall<CR>
 end
+
+if has('termguicolors') && ($COLORTERM == 'truecolor' || $COLORTERM == '24bit')
+    set termguicolors
+endif
 
 " =============================================================================
 " # KEYMAPS
