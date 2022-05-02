@@ -8,7 +8,7 @@ alias la "ls -A"
 alias ll "ls -l"
 alias lla "ll -A"
 alias g git
-command -qv nvim && alias vim nvim
+command -qv nvim && alias vim nvim && alias vi nvim
 
 if type -q exa
   alias ll "exa -l -g --icons"
