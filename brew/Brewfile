@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask", "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git"
 tap "homebrew/core", "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+tap "homebrew/cask-fonts"
 
 brew "autojump"
 brew "starship"
@@ -16,6 +17,8 @@ brew "dust"
 brew "git-delta"
 brew "fd"
 brew "ripgrep"
+
+cask "font-fira-code-nerd-font"
 
 cask "fork"
 cask "iterm2"
