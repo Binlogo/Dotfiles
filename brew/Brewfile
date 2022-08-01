@@ -15,8 +15,11 @@ brew "bat"
 brew "exa"
 brew "dust"
 brew "git-delta"
+brew "git-lfs"
 brew "fd"
 brew "ripgrep"
+brew "protobuf"
+brew "node"
 
 cask "font-fira-code-nerd-font"
 
