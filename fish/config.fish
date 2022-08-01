@@ -25,8 +25,14 @@ set -gx PATH ~/.local/bin $PATH
 # Rust & Cargo
 set -gx PATH ~/.cargo/bin:$PATH
 
+# Python3
+set -gx PATH ~/Library/Python/3.8/bin $PATH
+
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Starship prompt
 starship init fish | source
+
+# NVM load
+load_nvm > /dev/stderr
