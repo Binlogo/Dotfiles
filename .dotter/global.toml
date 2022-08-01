@@ -1,9 +1,11 @@
-[helpers]
 
 [fish.files]
 fish = "~/.config/fish"
 
 [nvim.files]
 nvim = "~/.config/nvim"
+
+[defaults]
+depends = ["fish", "nvim"]
 
 
