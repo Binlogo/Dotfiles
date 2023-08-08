@@ -2,9 +2,11 @@
 
 Build my macOS
 
+- [mackup](https://github.com/lra/mackup) - Keep your application settings in sync (OS X/Linux)
+
 ## Contents
 
-- dotter - dotfile manager 
+- dotter - dotfile manager
 - fish - shell
   - fisher - plugin manager
 - nvim - editor
