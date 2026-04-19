@@ -1,0 +1,50 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+# Restore Claude Code skills tracked in ~/.agents/.skill-lock.json.
+# Requires node (via mise, step 20-) and jq (via brew bundle, step 10-).
+
+export PATH="$HOME/.local/share/mise/shims:/opt/homebrew/bin:$HOME/.local/bin:$PATH"
+
+LOCK="$HOME/.agents/.skill-lock.json"
+
+# lock hash: {{ include "dot_agents/dot_skill-lock.json" | sha256sum }}
+
+if [[ ! -f "$LOCK" ]]; then
+  echo "skill lock not found at $LOCK — skipping" >&2
+  exit 0
+fi
+
+for cmd in jq npx; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "$cmd not found in PATH — skip skills restore" >&2
+    exit 0
+  fi
+done
+
+# Group skills by upstream source and install only the ones missing locally.
+jq -r '
+  .skills
+  | to_entries
+  | group_by(.value.source)
+  | map({source: .[0].value.source, names: (map(.key))})
+  | .[]
+  | "\(.source)\t\(.names | join(","))"
+' "$LOCK" | while IFS=$'\t' read -r source names; do
+  missing=""
+  IFS=',' read -r -a arr <<< "$names"
+  for name in "${arr[@]}"; do
+    if [[ ! -e "$HOME/.agents/skills/$name" ]]; then
+      missing="${missing:+$missing,}$name"
+    fi
+  done
+  if [[ -z "$missing" ]]; then
+    echo "==> $source: already installed"
+    continue
+  fi
+  echo "==> installing from $source: $missing"
+  npx -y skills add "$source" -g -a claude-code -s "$missing" -y \
+    || echo "WARN: failed to install from $source ($missing)" >&2
+done
+{{- end }}

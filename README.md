@@ -19,8 +19,24 @@ chezmoi init --apply Binlogo
 - `dot_gitconfig.tmpl` — git user info is templated
 - `private_dot_ssh/config.tmpl` — ssh config (work-only blocks gated on `.work`)
 - `dot_config/` — application configs (mise, starship, nvim, helix, alacritty, kitty, btop, zellij, karabiner)
+- `dot_agents/dot_skill-lock.json` — Claude Code skills manifest (managed by `npx skills`)
 - `run_onchange_before_10-install-packages-darwin.sh.tmpl` — `brew bundle`
-- `run_onchange_before_20-install-runtimes.sh.tmpl` — `mise install`
+- `run_onchange_after_20-install-runtimes.sh.tmpl` — `mise install`
+- `run_onchange_after_30-install-skills.sh.tmpl` — restore Claude Code skills from the lock file
+
+## Skills workflow
+
+Claude Code skills live at `~/.agents/skills/` (symlinked into `~/.claude/skills/`). Only
+the lock file is committed — skill content comes from upstream GitHub repos. To add/update:
+
+```sh
+npx skills add <owner/repo> -g -a claude-code -s <name>   # install
+npx skills update                                         # refresh all
+chezmoi re-add ~/.agents/.skill-lock.json                 # pull lock into source
+```
+
+Then commit the updated `dot_agents/dot_skill-lock.json`. On a fresh machine,
+`run_onchange_after_30-install-skills.sh.tmpl` replays the lock.
 
 ## Template data
 
