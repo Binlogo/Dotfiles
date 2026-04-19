@@ -1,0 +1,51 @@
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""
+
+plugins=(
+  git
+  brew
+  direnv
+  fzf
+  autojump
+  zsh-autosuggestions
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# --- PATH -------------------------------------------------------------
+typeset -U path PATH
+path=(
+  "$HOME/.local/bin"
+  "$HOME/.cargo/bin"
+  "$HOME/.bun/bin"
+  "$HOME/Library/pnpm"
+  "$HOME/.yarn/bin"
+  "$HOME/.opencode/bin"
+  "$HOME/.moss/bin"
+  $path
+)
+export PATH
+
+export BUN_INSTALL="$HOME/.bun"
+export PNPM_HOME="$HOME/Library/pnpm"
+
+# --- Runtimes (mise) --------------------------------------------------
+eval "$(mise activate zsh)"
+
+# --- Prompt -----------------------------------------------------------
+eval "$(starship init zsh)"
+
+# --- Aliases ----------------------------------------------------------
+alias ls="eza"
+alias ll="eza -l --git --icons"
+alias la="eza -la --git --icons"
+alias v="nvim"
+alias zshconfig="${EDITOR:-nvim} ~/.zshrc"
+alias cm="chezmoi"
+
+# --- Completions ------------------------------------------------------
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
+
+# --- Local overrides (never committed) --------------------------------
+# Put machine-specific env, tokens, or work-only settings in ~/.zshrc.local
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

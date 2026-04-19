@@ -1,0 +1,12 @@
+README.md
+LICENSE
+.DS_Store
+chezmoi.toml.example
+
+# btop runtime artifacts
+.config/btop/btop.log
+.config/btop/themes
+
+# karabiner backups / assets regenerate locally
+.config/karabiner/automatic_backups
+.config/karabiner/assets

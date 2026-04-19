@@ -1,0 +1,11 @@
+Host *
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
+    HostKeyAlgorithms +ssh-rsa
+    PubkeyAcceptedKeyTypes +ssh-rsa
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+
+# Any machine-specific or work-only hosts go in ~/.ssh/config.d/*.conf
+# (those files are never committed to this repo).
+Include ~/.ssh/config.d/*.conf

@@ -1,0 +1,10 @@
+[data]
+    # Default identity for local repos without a github.com remote
+    name = "Your Name"
+    email = "you@example.com"
+
+[data.github]
+    # Identity used automatically for any repo whose origin points at github.com
+    # (via an includeIf hasconfig:remote.*.url block in .gitconfig)
+    name = "Your GitHub Name"
+    email = "you@example.com"

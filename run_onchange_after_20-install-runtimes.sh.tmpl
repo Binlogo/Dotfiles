@@ -1,0 +1,19 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+# Install language runtimes declared in ~/.config/mise/config.toml.
+# Runs AFTER brew bundle (10-) installs mise itself.
+
+export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
+
+if ! command -v mise >/dev/null 2>&1; then
+  echo "mise not found — did brew bundle finish?" >&2
+  exit 1
+fi
+
+# Hash of the mise config determines when this script re-runs.
+# config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+
+mise install --yes
+{{- end }}

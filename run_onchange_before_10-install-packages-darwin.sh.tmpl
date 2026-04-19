@@ -1,0 +1,115 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+# Install/update Homebrew packages declared below.
+# Language runtimes (node, ruby, python, go, java) are managed by mise — do NOT list them here.
+
+brew bundle --file=/dev/stdin <<'EOF'
+# ---------------------------------------------------------------------
+# Taps
+# ---------------------------------------------------------------------
+tap "facebook/fb"
+tap "filosottile/musl-cross"
+tap "peripheryapp/periphery"
+tap "xcodesorg/made"
+
+# ---------------------------------------------------------------------
+# CLI tools
+# ---------------------------------------------------------------------
+brew "asciinema"
+brew "autojump"
+brew "automake"
+brew "bat"
+brew "binutils"
+brew "btop"
+brew "chezmoi"
+brew "clang-format"
+brew "cmake"
+brew "coreutils"
+brew "direnv"
+brew "doxygen"
+brew "dust"
+brew "eza"
+brew "fd"
+brew "fswatch"
+brew "fzf"
+brew "gh"
+brew "ghostscript"
+brew "git"
+brew "git-delta"
+brew "git-lfs"
+brew "graphviz"
+brew "helix"
+brew "jq"
+brew "just"
+brew "lazygit"
+brew "llvm"
+brew "mas"
+brew "mise"
+brew "mitmproxy"
+brew "neovim"
+brew "pnpm"
+brew "protolint"
+brew "pv"
+brew "rsync"
+brew "sccache"
+brew "scrcpy"
+brew "sniffnet"
+brew "sqlcipher"
+brew "starship"
+brew "swift-format"
+brew "swift-protobuf"
+brew "swiftformat"
+brew "tabiew"
+brew "tmux"
+brew "tokei"
+brew "tree"
+brew "wabt"
+brew "watchman"
+brew "wget"
+brew "xcodegen"
+brew "zellij"
+
+# iOS dev
+brew "ios-deploy"
+brew "libimobiledevice"
+brew "facebook/fb/idb-companion"
+brew "xcodesorg/made/xcodes"
+
+# Cross-compile
+brew "filosottile/musl-cross/musl-cross"
+
+# ---------------------------------------------------------------------
+# GUI apps (casks)
+# ---------------------------------------------------------------------
+cask "alacritty"
+cask "appcleaner"
+cask "charles"
+cask "contexts"
+cask "db-browser-for-sqlite"
+cask "font-fira-code-nerd-font"
+cask "fork"
+cask "istat-menus"
+cask "iterm2"
+cask "karabiner-elements"
+cask "obsidian"
+cask "proxyman"
+cask "raycast"
+cask "slack"
+cask "stats"
+cask "telegram"
+cask "ticktick"
+cask "typora"
+cask "visual-studio-code"
+
+# ---------------------------------------------------------------------
+# Mac App Store
+# ---------------------------------------------------------------------
+mas "The Unarchiver", id: 425424353
+mas "Time Out", id: 402592703
+mas "Take a Break", id: 1457158844
+mas "Bob", id: 1630034110
+mas "MenubarX", id: 1575588022
+EOF
+{{- end }}

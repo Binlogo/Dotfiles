@@ -1,0 +1,11 @@
+[tools]
+node = "lts"
+ruby = "3.4"
+java = "temurin-17"
+git-lfs = "latest"
+
+[settings]
+
+[settings.ruby]
+compile = false
+github_attestations = false

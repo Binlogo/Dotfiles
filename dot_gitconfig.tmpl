@@ -1,0 +1,50 @@
+[user]
+    name = {{ .name | quote }}
+    email = {{ .email | quote }}
+
+# Any repo with a github.com remote automatically uses the personal identity
+# defined in ~/.config/git/github.gitconfig.
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+    path = ~/.config/git/github.gitconfig
+[includeIf "hasconfig:remote.*.url:git@github.com:**"]
+    path = ~/.config/git/github.gitconfig
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+
+[merge]
+    conflictstyle = zdiff3
+
+[diff]
+    colorMoved = default
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true
+
+[rebase]
+    autoStash = true
+
+[push]
+    autoSetupRemote = true
+
+[alias]
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[safe]
+    directory = *
