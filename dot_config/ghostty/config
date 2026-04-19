@@ -1,0 +1,9 @@
+# Ghostty configuration.
+# cmux is Ghostty-based and honors the same config keys, so this file is
+# shared by both. Keep overrides minimal — rely on upstream defaults.
+#
+# Reference: ghostty +show-config --default --docs
+# Docs:      https://ghostty.org/docs/config
+
+font-family = FiraCode Nerd Font
+font-size = 13
