@@ -17,7 +17,6 @@ typeset -U path PATH
 path=(
   "$HOME/.local/bin"
   "$HOME/.cargo/bin"
-  "$HOME/.bun/bin"
   "$HOME/Library/pnpm"
   "$HOME/.yarn/bin"
   "$HOME/.opencode/bin"
@@ -26,7 +25,6 @@ path=(
 )
 export PATH
 
-export BUN_INSTALL="$HOME/.bun"
 export PNPM_HOME="$HOME/Library/pnpm"
 
 # --- Runtimes (mise) --------------------------------------------------
@@ -42,6 +40,9 @@ alias la="eza -la --git --icons"
 alias v="nvim"
 alias zshconfig="${EDITOR:-nvim} ~/.zshrc"
 alias cm="chezmoi"
+
+# Claude Code: compact at 40% of 1M context; pair with model=opusplan + fastMode=true
+alias c='CLAUDE_CODE_AUTO_COMPACT_WINDOW=400000 claude --dangerously-skip-permissions'
 
 # --- Completions ------------------------------------------------------
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
