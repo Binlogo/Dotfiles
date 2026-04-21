@@ -47,6 +47,64 @@ alias c='CLAUDE_CODE_AUTO_COMPACT_WINDOW=400000 claude --dangerously-skip-permis
 # --- Completions ------------------------------------------------------
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
+# --- Functions --------------------------------------------------------
+# Create a git worktree + open it in a new cmux workspace
+function wt() {
+  local branch=$1
+  local repo_dir project worktree_path ws
+  repo_dir=$(git rev-parse --show-toplevel) || return 1
+  project=$(basename "$repo_dir")
+  worktree_path="${repo_dir%/*}/${project}-${branch//\//-}"
+  git worktree add -b "$branch" "$worktree_path" || return 1
+  # Trust mise config so the new workspace doesn't show trust errors
+  for _f in "$worktree_path/mise.toml" "$worktree_path/.mise.toml"; do
+    [[ -f "$_f" ]] && mise trust "$_f" 2>/dev/null
+  done
+  ws=$(cmux new-workspace --name "${project}/${branch}" --cwd "$worktree_path" 2>&1 | awk '{print $2}')
+  cmux select-workspace --workspace "$ws"
+}
+
+# Remove current worktree, its branch, and close its cmux workspace
+function wtrm() {
+  local worktree_path main_path branch ws
+  worktree_path=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "wtrm: not in a git repo"; return 1; }
+  main_path=$(git worktree list --porcelain | awk 'NR==1{print $2}')
+  if [[ "$worktree_path" == "$main_path" ]]; then
+    echo "wtrm: cannot remove the main worktree"; return 1
+  fi
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  ws=$(cmux current-workspace)
+
+  # Safety checks
+  local warnings=()
+  local dirty
+  dirty=$(git -C "$worktree_path" status --porcelain 2>/dev/null)
+  [[ -n "$dirty" ]] && warnings+=("worktree has uncommitted changes")
+  if ! git -C "$main_path" merge-base --is-ancestor "$branch" HEAD 2>/dev/null; then
+    warnings+=("branch '${branch}' has unmerged commits")
+  fi
+
+  local force=false
+  if (( ${#warnings[@]} > 0 )); then
+    echo "wtrm: warning:"
+    for w in "${warnings[@]}"; do echo "  - $w"; done
+    echo -n "Force remove anyway? [y/N] "
+    read -r confirm
+    [[ "$confirm" != [yY] ]] && return 1
+    force=true
+  fi
+
+  cmux select-workspace --workspace workspace:1
+  if $force; then
+    git -C "$main_path" worktree remove --force "$worktree_path"
+    git -C "$main_path" branch -D "$branch"
+  else
+    git -C "$main_path" worktree remove "$worktree_path"
+    git -C "$main_path" branch -d "$branch"
+  fi
+  cmux close-workspace --workspace "$ws"
+}
+
 # --- Local overrides (never committed) --------------------------------
 # Put machine-specific env, tokens, or work-only settings in ~/.zshrc.local
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
