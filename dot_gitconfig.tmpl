@@ -4,9 +4,14 @@
 
 # Any repo with a github.com remote automatically uses the personal identity
 # defined in ~/.config/git/github.gitconfig.
-[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+# Note: git's hasconfig:remote.*.url uses fnmatch+FNM_PATHNAME — `*` does not
+# cross `/`, and trailing `**` on its own does not match. List explicit
+# owner/repo segments instead.
+[includeIf "hasconfig:remote.*.url:https://github.com/*/*"]
     path = ~/.config/git/github.gitconfig
-[includeIf "hasconfig:remote.*.url:git@github.com:**"]
+[includeIf "hasconfig:remote.*.url:git@github.com:*/*"]
+    path = ~/.config/git/github.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/*/*"]
     path = ~/.config/git/github.gitconfig
 
 [core]
@@ -48,3 +53,8 @@
 
 [safe]
     directory = *
+
+# Per-machine overrides (work identity, host-specific aliases, etc.)
+# File is created locally on each machine and is NOT committed to the repo.
+[include]
+    path = ~/.gitconfig.local
