@@ -4,110 +4,104 @@ set -euo pipefail
 
 # Install/update Homebrew packages declared below.
 # Language runtimes (node, ruby, python, go, java) are managed by mise — do NOT list them here.
+#
+# Philosophy: only the *daily-driver* tools live here. Project-specific tooling
+# (iOS / Android / Swift / C++ / network capture / Mac App Store apps) is left
+# out — install on demand. See the bottom of this file for the curated
+# "install-on-demand" reference list.
 
-brew bundle --file=/dev/stdin <<'EOF'
+# brew bundle's exit status is non-zero on partial failures (e.g. an existing
+# differently-versioned cask, a symlink already in place from mise/corepack).
+# We log and continue so downstream run_onchange scripts (mise, skills) still run.
+brew bundle --file=/dev/stdin <<'EOF' || echo "WARN: brew bundle reported partial failures — see log above"
 # ---------------------------------------------------------------------
-# Taps
+# CLI tools (daily)
 # ---------------------------------------------------------------------
-tap "facebook/fb"
-tap "filosottile/musl-cross"
-tap "peripheryapp/periphery"
-tap "xcodesorg/made"
-
-# ---------------------------------------------------------------------
-# CLI tools
-# ---------------------------------------------------------------------
-brew "asciinema"
 brew "autojump"
-brew "automake"
 brew "bat"
-brew "binutils"
 brew "btop"
 brew "chezmoi"
-brew "clang-format"
-brew "cmake"
 brew "coreutils"
 brew "direnv"
-brew "doxygen"
 brew "dust"
 brew "eza"
 brew "fd"
-brew "fswatch"
 brew "fzf"
 brew "gh"
-brew "ghostscript"
 brew "git"
 brew "git-delta"
 brew "git-lfs"
-brew "graphviz"
 brew "helix"
 brew "jq"
 brew "just"
 brew "lazygit"
-brew "llvm"
-brew "mas"
 brew "mise"
-brew "mitmproxy"
 brew "neovim"
 brew "pnpm"
-brew "protolint"
-brew "pv"
+brew "ripgrep"
 brew "rsync"
-brew "sccache"
-brew "scrcpy"
-brew "sniffnet"
-brew "sqlcipher"
 brew "starship"
-brew "swift-format"
-brew "swift-protobuf"
-brew "swiftformat"
-brew "tabiew"
-brew "tmux"
-brew "tokei"
 brew "tree"
-brew "wabt"
-brew "watchman"
 brew "wget"
-brew "xcodegen"
-
-# iOS dev
-brew "ios-deploy"
-brew "libimobiledevice"
-brew "facebook/fb/idb-companion"
-brew "xcodesorg/made/xcodes"
-
-# Cross-compile
-brew "filosottile/musl-cross/musl-cross"
 
 # ---------------------------------------------------------------------
-# GUI apps (casks)
+# GUI apps (casks, daily)
 # ---------------------------------------------------------------------
 cask "appcleaner"
-cask "charles"
 cask "cmux"
 cask "contexts"
-cask "db-browser-for-sqlite"
 cask "font-fira-code-nerd-font"
 cask "fork"
 cask "istat-menus"
 cask "karabiner-elements"
 cask "obsidian"
-cask "proxyman"
 cask "raycast"
 cask "slack"
 cask "stats"
 cask "telegram"
-cask "ticktick"
 cask "typora"
 cask "visual-studio-code"
+EOF
 
 # ---------------------------------------------------------------------
-# Mac App Store
+# Install-on-demand reference (NOT auto-installed)
 # ---------------------------------------------------------------------
-mas "The Unarchiver", id: 425424353
-mas "Time Out", id: 402592703
-mas "Take a Break", id: 1457158844
-mas "Bob", id: 1630034110
-mas "MenubarX", id: 1575588022
-EOF
+# Run these manually when a project actually needs them. They were removed
+# from the Brewfile to keep `brew bundle` fast, sudo-free, and ~GB lighter.
+#
+#   # iOS / mobile dev
+#   brew tap facebook/fb && brew tap xcodesorg/made
+#   brew install ios-deploy libimobiledevice facebook/fb/idb-companion xcodesorg/made/xcodes
+#
+#   # C/C++ / cross-compile
+#   brew install llvm cmake automake binutils
+#   brew tap filosottile/musl-cross && brew install filosottile/musl-cross/musl-cross
+#
+#   # Swift / protobuf
+#   brew install swift-format swift-protobuf swiftformat clang-format protolint
+#
+#   # Build infra / cache
+#   brew install sccache watchman xcodegen wabt
+#
+#   # Doc / image
+#   brew install doxygen ghostscript graphviz
+#
+#   # Network capture / mobile mirror
+#   brew install mitmproxy sniffnet scrcpy
+#   brew install --cask charles proxyman
+#
+#   # SQLite / data inspection
+#   brew install sqlcipher tabiew
+#   brew install --cask db-browser-for-sqlite
+#
+#   # Misc niceties
+#   brew install asciinema pv tmux tokei fswatch
+#
+#   # Mac App Store (needs `mas` + GUI sign-in; skip in headless bundle)
+#   brew install mas
+#   mas install 425424353   # The Unarchiver
+#   mas install 402592703   # Time Out
+#   mas install 1457158844  # Take a Break
+#   mas install 1630034110  # Bob
+#   mas install 1575588022  # MenubarX
 {{- end }}
