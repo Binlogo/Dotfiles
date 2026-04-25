@@ -234,7 +234,61 @@
       "skillPath": "plugins/claude-md-management/skills/claude-md-improver/SKILL.md",
       "skillFolderHash": "7188018e6710998fbc3227fdacd1b2b6e0508c38",
       "installedAt": "2026-04-17T03:47:25.587Z",
-      "updatedAt": "2026-04-17T03:47:25.587Z"
+      "updatedAt": "2026-04-25T08:43:38.329Z"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pbakaus/impeccable.git",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "skillFolderHash": "4874196972ac8394f3f76112f57cdd38931bc25e",
+      "installedAt": "2026-04-25T08:52:27.997Z",
+      "updatedAt": "2026-04-25T08:52:27.997Z"
+    },
+    "defuddle": {
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
+      "skillPath": "skills/defuddle/SKILL.md",
+      "skillFolderHash": "db0b775af7e7d603f59fa2b67bdef615baf1a48f",
+      "installedAt": "2026-04-25T08:52:43.602Z",
+      "updatedAt": "2026-04-25T08:52:43.602Z"
+    },
+    "json-canvas": {
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
+      "skillPath": "skills/json-canvas/SKILL.md",
+      "skillFolderHash": "9df7971db7ffebf96f2a207840b9f4765aa11b04",
+      "installedAt": "2026-04-25T08:52:44.133Z",
+      "updatedAt": "2026-04-25T08:52:44.133Z"
+    },
+    "obsidian-bases": {
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
+      "skillPath": "skills/obsidian-bases/SKILL.md",
+      "skillFolderHash": "4bef60bb848bfb02b4172b552626d5741b0d4057",
+      "installedAt": "2026-04-25T08:52:44.633Z",
+      "updatedAt": "2026-04-25T08:52:44.633Z"
+    },
+    "obsidian-cli": {
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
+      "skillPath": "skills/obsidian-cli/SKILL.md",
+      "skillFolderHash": "96254a554e480359de7b685571876f2e7f9ba57d",
+      "installedAt": "2026-04-25T08:52:45.158Z",
+      "updatedAt": "2026-04-25T08:52:45.158Z"
+    },
+    "obsidian-markdown": {
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
+      "skillPath": "skills/obsidian-markdown/SKILL.md",
+      "skillFolderHash": "5caf5d9e7de204f3904216857545f2aa36bcfcac",
+      "installedAt": "2026-04-25T08:52:45.658Z",
+      "updatedAt": "2026-04-25T08:52:45.658Z"
     }
   },
   "dismissed": {
