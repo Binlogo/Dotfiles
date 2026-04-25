@@ -10,15 +10,6 @@
       "installedAt": "2026-04-13T08:10:23.960Z",
       "updatedAt": "2026-04-13T08:10:23.960Z"
     },
-    "lark-attendance": {
-      "source": "larksuite/cli",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/larksuite/cli.git",
-      "skillPath": "skills/lark-attendance/SKILL.md",
-      "skillFolderHash": "4702032975fb1a4c50aa16a82cbb6db1e14c371c",
-      "installedAt": "2026-04-13T08:10:24.846Z",
-      "updatedAt": "2026-04-13T08:10:24.846Z"
-    },
     "lark-base": {
       "source": "larksuite/cli",
       "sourceType": "github",
@@ -135,15 +126,6 @@
       "skillFolderHash": "f1f0673f26a0b5d2b6cf12454dd47253587f181e",
       "installedAt": "2026-04-13T08:10:34.262Z",
       "updatedAt": "2026-04-13T08:10:34.262Z"
-    },
-    "lark-slides": {
-      "source": "larksuite/cli",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/larksuite/cli.git",
-      "skillPath": "skills/lark-slides/SKILL.md",
-      "skillFolderHash": "fe0d20e2bcbbb588919814dda7e9aba49c6501df",
-      "installedAt": "2026-04-13T08:10:35.192Z",
-      "updatedAt": "2026-04-13T08:10:35.192Z"
     },
     "lark-task": {
       "source": "larksuite/cli",
