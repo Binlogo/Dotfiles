@@ -5,61 +5,40 @@ set -euo pipefail
 # Install/update Homebrew packages declared below.
 # Language runtimes (node, ruby, python, go, java) are managed by mise — do NOT list them here.
 #
-# Philosophy: only the *daily-driver* tools live here. Project-specific tooling
-# (iOS / Android / Swift / C++ / network capture / Mac App Store apps) is left
-# out — install on demand. See the bottom of this file for the curated
-# "install-on-demand" reference list.
+# Philosophy: keep first-run install small. Only bootstrap-critical and
+# always-on tools live here. Infrequent GUI apps, communication apps, duplicate
+# utilities, and project-specific tooling are install-on-demand. See the bottom
+# of this file for the curated reference list.
 
 # brew bundle's exit status is non-zero on partial failures (e.g. an existing
 # differently-versioned cask, a symlink already in place from mise/corepack).
 # We log and continue so downstream run_onchange scripts (mise, skills) still run.
 brew bundle --file=/dev/stdin <<'EOF' || echo "WARN: brew bundle reported partial failures — see log above"
 # ---------------------------------------------------------------------
-# CLI tools (daily)
+# CLI tools (bootstrap-critical)
 # ---------------------------------------------------------------------
 brew "autojump"
-brew "bat"
-brew "btop"
 brew "chezmoi"
-brew "coreutils"
 brew "direnv"
-brew "dust"
 brew "eza"
 brew "fd"
 brew "fzf"
 brew "gh"
 brew "git"
 brew "git-delta"
-brew "git-lfs"
-brew "helix"
 brew "jq"
-brew "just"
-brew "lazygit"
 brew "mise"
 brew "neovim"
-brew "pnpm"
 brew "ripgrep"
-brew "rsync"
 brew "starship"
-brew "tree"
-brew "wget"
 
 # ---------------------------------------------------------------------
-# GUI apps (casks, daily)
+# GUI apps (first-run essentials)
 # ---------------------------------------------------------------------
-cask "appcleaner"
 cask "cmux"
-cask "contexts"
 cask "font-fira-code-nerd-font"
-cask "fork"
-cask "istat-menus"
 cask "karabiner-elements"
-cask "obsidian"
 cask "raycast"
-cask "slack"
-cask "stats"
-cask "telegram"
-cask "typora"
 cask "visual-studio-code"
 EOF
 
@@ -68,6 +47,19 @@ EOF
 # ---------------------------------------------------------------------
 # Run these manually when a project actually needs them. They were removed
 # from the Brewfile to keep `brew bundle` fast, sudo-free, and ~GB lighter.
+#
+#   # Low-frequency CLI / duplicates
+#   brew install bat btop coreutils dust helix just lazygit rsync tree wget
+#
+#   # Runtime-adjacent tools
+#   # pnpm can come from Node/Corepack; git-lfs is managed by mise in this repo.
+#   brew install pnpm git-lfs
+#
+#   # Low-frequency GUI utilities
+#   brew install --cask appcleaner contexts fork istat-menus obsidian stats typora
+#
+#   # Communication apps
+#   brew install --cask slack telegram
 #
 #   # iOS / mobile dev
 #   brew tap facebook/fb && brew tap xcodesorg/made
