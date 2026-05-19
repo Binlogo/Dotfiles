@@ -1,6 +1,7 @@
 [tools]
 node = "lts"
 ruby = "3.4"
+python = "3.14"
 java = "temurin-17"
 git-lfs = "latest"
 # Upgrade via `mise use -g bun@latest` — `bun upgrade` bypasses mise.
