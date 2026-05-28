@@ -1,0 +1,52 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+# Restore Claude Code plugins declared in ~/.claude/settings.json.
+#
+# `enabledPlugins` only TOGGLES a plugin on/off — it does NOT download it.
+# A fresh machine therefore needs each third-party marketplace registered and
+# each enabled plugin explicitly installed. Both `claude plugin marketplace add`
+# and `claude plugin install` are idempotent, so this is safe to re-run.
+#
+# Requires the `claude` CLI (in PATH) and jq (via brew bundle, step 10-).
+
+export PATH="$HOME/.local/share/mise/shims:/opt/homebrew/bin:$HOME/.local/bin:$PATH"
+
+SETTINGS="$HOME/.claude/settings.json"
+
+# settings hash: {{ include "dot_claude/settings.json" | sha256sum }}
+
+for cmd in claude jq; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "$cmd not found in PATH — skip plugin restore" >&2
+    exit 0
+  fi
+done
+
+if [[ ! -f "$SETTINGS" ]]; then
+  echo "no settings.json at $SETTINGS — skip" >&2
+  exit 0
+fi
+
+# 1. Register any extra marketplaces declared in settings (idempotent).
+jq -r '(.extraKnownMarketplaces // {}) | to_entries[] | .value.source.repo // empty' "$SETTINGS" \
+  | while read -r repo; do
+      [[ -z "$repo" ]] && continue
+      echo "==> marketplace add $repo"
+      claude plugin marketplace add "$repo" 2>&1 || echo "WARN: marketplace add $repo failed" >&2
+    done
+
+# 2. Install each enabled plugin that isn't already present.
+installed="$(claude plugin list 2>/dev/null || true)"
+jq -r '(.enabledPlugins // {}) | to_entries[] | select(.value == true) | .key' "$SETTINGS" \
+  | while read -r plugin; do
+      if printf '%s\n' "$installed" | grep -qF "$plugin"; then
+        echo "==> $plugin: already installed"
+      else
+        echo "==> installing $plugin"
+        claude plugin install "$plugin" --scope user 2>&1 \
+          || echo "WARN: failed to install $plugin" >&2
+      fi
+    done
+{{- end }}
