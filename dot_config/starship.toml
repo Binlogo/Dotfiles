@@ -1,1 +1,27 @@
-command_timeout = 5000
+# ~/.config/starship.toml
+
+add_newline = false
+command_timeout = 10000
+format = "$directory$git_branch$git_status$package$cmd_duration$character"
+
+[directory]
+truncate_to_repo = true
+truncation_length = 2
+format = "[$path]($style)[$read_only]($read_only_style)"
+
+[character]
+success_symbol = " "
+error_symbol = " "
+format = "$symbol"
+
+[git_branch]
+format = " on [$symbol$branch(:$remote_branch)]($style)"
+
+[git_status]
+format = "([\\[$all_status$ahead_behind\\]]($style))"
+
+[package]
+format = " is [$symbol$version]($style)"
+
+[cmd_duration]
+format = " took [$duration]($style)"
