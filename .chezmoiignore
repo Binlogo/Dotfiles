@@ -10,3 +10,7 @@ chezmoi.toml.example
 # karabiner backups / assets regenerate locally
 .config/karabiner/automatic_backups
 .config/karabiner/assets
+
+# Obsidian: lock is a git-only record, never written back into the vault
+# (Obsidian Sync owns the live .obsidian state)
+Documents/Knowledge-Track/.obsidian/obsidian-plugins.lock.json
