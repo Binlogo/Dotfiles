@@ -15,6 +15,10 @@ chezmoi init --apply Binlogo
 
 ## Layout
 
+All chezmoi source state lives under `home/` (set by `.chezmoiroot`); the repo
+root holds only project plumbing (this README, `chezmoi.toml.example`). Paths
+below are relative to `home/`.
+
 - `dot_zshrc.tmpl` / `dot_zprofile` / `dot_zshenv` — zsh configuration
 - `dot_gitconfig.tmpl` — git user info is templated
 - `private_dot_ssh/config.tmpl` — ssh config (work-only blocks gated on `.work`)

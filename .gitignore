@@ -1,0 +1,5 @@
+# Real dotfiles live under home/ (.chezmoiroot); the repo root is project plumbing.
+# Project-level .claude/ and .agents/ are intentionally NOT ignored — track them
+# here if ever needed.
+/log/
+.DS_Store
