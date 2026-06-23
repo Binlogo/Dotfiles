@@ -24,7 +24,6 @@ root holds project plumbing (this README, `chezmoi.toml.example`) and the
 - `private_dot_ssh/config.tmpl` — ssh config (work-only blocks gated on `.work`)
 - `dot_config/` — application configs (mise, sheldon, starship, nvim, helix, alacritty, kitty, btop, zellij, karabiner)
 - `dot_config/sheldon/plugins.toml` — zsh plugins (autosuggestions, syntax highlighting, OMZ git aliases)
-- `dot_agents/dot_skill-lock.json` — Claude Code skills manifest (managed by `npx skills`)
 
 ### Provisioning scripts
 
@@ -42,25 +41,10 @@ Thin chezmoi wrappers in `home/.chezmoiscripts/` pull each body in with
 | `macos/run_onchange_before_10-install-packages-darwin.sh.tmpl` | `install/macos/common/brew.sh` | `brew bundle` | the embedded Brewfile |
 | `common/run_onchange_after_20-install-runtimes.sh.tmpl` | `install/common/mise.sh` | `mise install` | `dot_config/mise/config.toml` |
 | `common/run_onchange_after_25-install-zsh-plugins.sh.tmpl` | `install/common/sheldon.sh` | `sheldon lock` (clone zsh plugins) | `dot_config/sheldon/plugins.toml` |
-| `common/run_onchange_after_30-install-skills.sh.tmpl` | `install/common/claude_skills.sh` | restore Claude Code skills | `dot_agents/dot_skill-lock.json` |
 | `common/run_onchange_after_40-install-plugins.sh.tmpl` | `install/common/claude_plugins.sh` | install Claude Code plugins | `dot_claude/settings.json` |
 
 `before_` runs ahead of file apply (Homebrew installs `mise`, `sheldon`, `jq`);
 the `after_` steps run once those binaries exist.
-
-## Skills workflow
-
-Claude Code skills live at `~/.agents/skills/` (symlinked into `~/.claude/skills/`). Only
-the lock file is committed — skill content comes from upstream GitHub repos. To add/update:
-
-```sh
-npx skills add <owner/repo> -g -a claude-code -s <name>   # install
-npx skills update                                         # refresh all
-chezmoi re-add ~/.agents/.skill-lock.json                 # pull lock into source
-```
-
-Then commit the updated `dot_agents/dot_skill-lock.json`. On a fresh machine,
-the `after_30` skills wrapper (→ `install/common/claude_skills.sh`) replays the lock.
 
 ## Plugins workflow
 
