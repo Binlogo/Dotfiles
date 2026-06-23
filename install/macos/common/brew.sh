@@ -1,19 +1,32 @@
-{{- if eq .chezmoi.os "darwin" -}}
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
 
-# Install/update Homebrew packages declared below.
-# Language runtimes (node, ruby, python, go, java) are managed by mise — do NOT list them here.
+# @file install/macos/common/brew.sh
+# @brief Install the bootstrap-critical Homebrew packages.
+# @description
+#   Installs the curated set of always-on CLI tools and first-run GUI apps via
+#   `brew bundle`. Language runtimes (node, ruby, python, go, java) are managed
+#   by mise — do NOT list them here.
 #
-# Philosophy: keep first-run install small. Only bootstrap-critical and
-# always-on tools live here. Infrequent GUI apps, communication apps, duplicate
-# utilities, and project-specific tooling are install-on-demand. See the bottom
-# of this file for the curated reference list.
+#   Philosophy: keep first-run install small. Only bootstrap-critical and
+#   always-on tools live here. Infrequent GUI apps, communication apps, duplicate
+#   utilities, and project-specific tooling are install-on-demand — see the
+#   reference list at the bottom of this file.
 
-# brew bundle's exit status is non-zero on partial failures (e.g. an existing
-# differently-versioned cask, a symlink already in place from mise/corepack).
-# We log and continue so downstream run_onchange scripts (mise, skills) still run.
-brew bundle --file=/dev/stdin <<'EOF' || echo "WARN: brew bundle reported partial failures — see log above"
+set -Eeuo pipefail
+
+if [ "${DOTFILES_DEBUG:-}" ]; then
+    set -x
+fi
+
+#
+# @description Install the curated Homebrew bundle.
+# @note `brew bundle`'s exit status is non-zero on partial failures (e.g. an
+#   existing differently-versioned cask, or a symlink already placed by
+#   mise/corepack). We log and continue so downstream steps (mise, skills) still
+#   run.
+#
+function install_packages() {
+    brew bundle --file=/dev/stdin <<'EOF' || echo "WARN: brew bundle reported partial failures — see log above"
 # ---------------------------------------------------------------------
 # CLI tools (bootstrap-critical)
 # ---------------------------------------------------------------------
@@ -42,6 +55,7 @@ cask "karabiner-elements"
 cask "raycast"
 cask "visual-studio-code"
 EOF
+}
 
 # ---------------------------------------------------------------------
 # Install-on-demand reference (NOT auto-installed)
@@ -97,4 +111,14 @@ EOF
 #   mas install 1457158844  # Take a Break
 #   mas install 1630034110  # Bob
 #   mas install 1575588022  # MenubarX
-{{- end }}
+
+#
+# @description Install the bootstrap-critical Homebrew packages.
+#
+function main() {
+    install_packages
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+fi

@@ -16,8 +16,8 @@ chezmoi init --apply Binlogo
 ## Layout
 
 All chezmoi source state lives under `home/` (set by `.chezmoiroot`); the repo
-root holds only project plumbing (this README, `chezmoi.toml.example`). Paths
-below are relative to `home/`.
+root holds project plumbing (this README, `chezmoi.toml.example`) and the
+`install/` scripts. Paths in this first list are relative to `home/`.
 
 - `dot_zshrc.tmpl` / `dot_zprofile` / `dot_zshenv` — zsh configuration
 - `dot_gitconfig.tmpl` — git user info is templated
@@ -25,11 +25,28 @@ below are relative to `home/`.
 - `dot_config/` — application configs (mise, sheldon, starship, nvim, helix, alacritty, kitty, btop, zellij, karabiner)
 - `dot_config/sheldon/plugins.toml` — zsh plugins (autosuggestions, syntax highlighting, OMZ git aliases)
 - `dot_agents/dot_skill-lock.json` — Claude Code skills manifest (managed by `npx skills`)
-- `run_onchange_before_10-install-packages-darwin.sh.tmpl` — `brew bundle`
-- `run_onchange_after_20-install-runtimes.sh.tmpl` — `mise install`
-- `run_onchange_after_25-install-zsh-plugins.sh.tmpl` — `sheldon lock` (clone zsh plugins)
-- `run_onchange_after_30-install-skills.sh.tmpl` — restore Claude Code skills from the lock file
-- `run_onchange_after_40-install-plugins.sh.tmpl` — install Claude Code plugins declared in `dot_claude/settings.json`
+
+### Provisioning scripts
+
+Install logic lives in standalone, runnable shell scripts under `install/` (at
+the repo root, *outside* `.chezmoiroot`, so chezmoi never copies them to `~`).
+Each is a small library — doc header, named functions, a `main`, and a
+`BASH_SOURCE`/`$0` guard so it also runs directly (`bash install/common/mise.sh`).
+
+Thin chezmoi wrappers in `home/.chezmoiscripts/` pull each body in with
+`{{ include "../install/…" }}` and append a hash of the relevant config, so
+`chezmoi apply` replays a step only when its script or its config changes:
+
+| Wrapper (`home/.chezmoiscripts/…`) | Includes | Does | Re-runs on |
+| --- | --- | --- | --- |
+| `macos/run_onchange_before_10-install-packages-darwin.sh.tmpl` | `install/macos/common/brew.sh` | `brew bundle` | the embedded Brewfile |
+| `common/run_onchange_after_20-install-runtimes.sh.tmpl` | `install/common/mise.sh` | `mise install` | `dot_config/mise/config.toml` |
+| `common/run_onchange_after_25-install-zsh-plugins.sh.tmpl` | `install/common/sheldon.sh` | `sheldon lock` (clone zsh plugins) | `dot_config/sheldon/plugins.toml` |
+| `common/run_onchange_after_30-install-skills.sh.tmpl` | `install/common/claude_skills.sh` | restore Claude Code skills | `dot_agents/dot_skill-lock.json` |
+| `common/run_onchange_after_40-install-plugins.sh.tmpl` | `install/common/claude_plugins.sh` | install Claude Code plugins | `dot_claude/settings.json` |
+
+`before_` runs ahead of file apply (Homebrew installs `mise`, `sheldon`, `jq`);
+the `after_` steps run once those binaries exist.
 
 ## Skills workflow
 
@@ -43,14 +60,15 @@ chezmoi re-add ~/.agents/.skill-lock.json                 # pull lock into sourc
 ```
 
 Then commit the updated `dot_agents/dot_skill-lock.json`. On a fresh machine,
-`run_onchange_after_30-install-skills.sh.tmpl` replays the lock.
+the `after_30` skills wrapper (→ `install/common/claude_skills.sh`) replays the lock.
 
 ## Plugins workflow
 
 Claude Code plugins are declared in `dot_claude/settings.json` (`enabledPlugins` +
 `extraKnownMarketplaces`). Because `enabledPlugins` only *toggles* a plugin and never
-downloads it, `run_onchange_after_40-install-plugins.sh.tmpl` registers each declared
-marketplace and installs each enabled plugin on a fresh machine. To add one:
+downloads it, the `after_40` plugins wrapper (→ `install/common/claude_plugins.sh`)
+registers each declared marketplace and installs each enabled plugin on a fresh
+machine. To add one:
 
 ```sh
 claude plugin marketplace add <owner/repo>          # e.g. jarrodwatts/claude-hud

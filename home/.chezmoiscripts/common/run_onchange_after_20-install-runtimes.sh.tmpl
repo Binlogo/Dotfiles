@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.os "darwin" -}}
+{{   include "../install/common/mise.sh" }}
+# Re-run when the mise tool manifest changes.
+# mise config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+{{- end }}

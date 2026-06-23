@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.os "darwin" -}}
+{{   include "../install/common/claude_skills.sh" }}
+# Re-run when the tracked skill set changes.
+# lock hash: {{ include "dot_agents/dot_skill-lock.json" | sha256sum }}
+{{- end }}
