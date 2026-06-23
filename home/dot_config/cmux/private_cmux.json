@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+
+  // Managed by chezmoi (source: home/dot_config/cmux/private_cmux.json). JSONC.
+  // Only the keys we want file-managed are uncommented; anything omitted falls
+  // back to the value saved in cmux Settings. After editing: `cmux reload-config`
+  // (reloads this + Ghostty config in place, no app restart). Full key list:
+  // `cmux settings cmux-json`, or the $schema URL above.
+  //
+  // Decision (2026-06, frozen — see ~/.config/ghostty/config): cmux is the daily
+  // driver, but its embedded browser is disabled — compatibility lagged the
+  // system browser. Clicked links and `open https://…` go to the macOS default
+  // browser instead of the in-app browser.
+  "browser": {
+    "openTerminalLinksInCmuxBrowser": false,
+    "interceptTerminalOpenCommandInCmuxBrowser": false
+  },
+
+  // Survive a cmux quit/crash: on reopen, re-run agent resume commands (e.g.
+  // `claude --resume`). The agent's own session files hold the conversation, so
+  // a Claude Code session comes back intact. NOTE: this resumes *agents* only —
+  // long non-agent processes (builds, servers) do not survive; run those under
+  // tmux via `tw` (see ~/.zshrc) when they must outlive the front-end.
+  "terminal": {
+    "autoResumeAgentSessions": true
+  }
+}
