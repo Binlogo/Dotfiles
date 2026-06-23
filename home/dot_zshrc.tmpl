@@ -21,7 +21,14 @@ SAVEHIST=50000
 setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS INC_APPEND_HISTORY EXTENDED_HISTORY
 
 # --- Completion -------------------------------------------------------
-autoload -Uz compinit && compinit
+# Rebuild + security-audit the completion dump at most once a day; otherwise
+# load the cached dump and skip the audit. Auditing Homebrew's hundreds of
+# site-functions on every login shell is the single biggest startup cost.
+autoload -Uz compinit
+() {
+  local -a dump=( "${ZDOTDIR:-$HOME}/.zcompdump"(Nmh+24) )
+  if (( $#dump )); then compinit; else compinit -C; fi
+}
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # case-insensitive
 
