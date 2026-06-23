@@ -1,0 +1,32 @@
+# sheldon — zsh plugin manager (replaces oh-my-zsh)
+# Managed by chezmoi → ~/.config/sheldon/plugins.toml
+# After editing, run `sheldon lock --update` (run_onchange_after_25 does this on `chezmoi apply`).
+# Plugins are sourced in the order they appear below.
+
+shell = "zsh"
+
+[plugins]
+
+# Oh-My-Zsh git aliases (gst, gco, gd, gp, glog, gcb, …) preserved without the
+# framework. lib/git.zsh must load first — it defines the helpers (current_branch,
+# git_main_branch, …) the plugin's aliases depend on.
+[plugins.ohmyzsh-git-lib]
+github = "ohmyzsh/ohmyzsh"
+dir = "lib"
+use = ["git.zsh"]
+
+[plugins.ohmyzsh-git]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/git"
+use = ["git.plugin.zsh"]
+
+# Fish-style autosuggestions (previously a stray git-clone in $ZSH/custom — now tracked).
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
+
+# Syntax highlighting — new (you had none). MUST be sourced last so it can wrap
+# every widget defined above (including autosuggestions).
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+use = ["{{ name }}.plugin.zsh"]

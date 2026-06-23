@@ -17,7 +17,6 @@ brew bundle --file=/dev/stdin <<'EOF' || echo "WARN: brew bundle reported partia
 # ---------------------------------------------------------------------
 # CLI tools (bootstrap-critical)
 # ---------------------------------------------------------------------
-brew "autojump"
 brew "chezmoi"
 brew "direnv"
 brew "eza"
@@ -30,7 +29,9 @@ brew "jq"
 brew "mise"
 brew "neovim"
 brew "ripgrep"
+brew "sheldon"      # zsh plugin manager (replaces oh-my-zsh)
 brew "starship"
+brew "zoxide"       # smarter cd (replaces autojump)
 
 # ---------------------------------------------------------------------
 # GUI apps (first-run essentials)

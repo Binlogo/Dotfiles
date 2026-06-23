@@ -1,0 +1,19 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+# Clone/update the zsh plugins declared in ~/.config/sheldon/plugins.toml.
+# Runs AFTER brew bundle (10-) installs sheldon itself.
+
+export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
+
+if ! command -v sheldon >/dev/null 2>&1; then
+  echo "sheldon not found — did brew bundle finish?" >&2
+  exit 1
+fi
+
+# Hash of the plugin manifest determines when this script re-runs.
+# config hash: {{ include "dot_config/sheldon/plugins.toml" | sha256sum }}
+
+sheldon lock --update
+{{- end }}
