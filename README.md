@@ -26,7 +26,6 @@ chezmoi init --apply Binlogo
 - `run_onchange_after_25-install-zsh-plugins.sh.tmpl` — `sheldon lock` (clone zsh plugins)
 - `run_onchange_after_30-install-skills.sh.tmpl` — restore Claude Code skills from the lock file
 - `run_onchange_after_40-install-plugins.sh.tmpl` — install Claude Code plugins declared in `dot_claude/settings.json`
-- `private_Documents/Knowledge-Track/dot_obsidian/` — minimal Obsidian record (see Obsidian workflow)
 
 ## Skills workflow
 
@@ -56,31 +55,6 @@ claude plugin install <plugin>@<marketplace> --scope user
 
 Then mirror the marketplace + plugin into `dot_claude/settings.json` and commit. Both CLI
 calls are idempotent, so the run_onchange script is safe to replay.
-
-## Obsidian workflow
-
-The `Knowledge-Track` vault uses **Obsidian Sync** as the source of truth for live state —
-plugin binaries, plugin settings (`data.json`), themes, snippets, hotkeys and appearance all
-restore automatically on a new device after login. chezmoi therefore tracks only a **minimal,
-git-reviewable record**, not the 70+ MB of plugin binaries:
-
-- `community-plugins.json` — the list of enabled community plugins
-- `core-plugins.json` — core plugin toggles
-- `obsidian-plugins.lock.json` — generated manifest of `id → { repo, version }`, **git-tracked
-  but not deployed** (see `.chezmoiignore`). Pure disaster-recovery reference for rebuilding
-  without Sync.
-
-Everything else under `.obsidian/` (binaries, `data.json`, `workspace.json`) is intentionally
-**not** managed — Sync owns it, and tracking it would only produce churn and risk committing
-secrets (e.g. plugin API tokens live in `data.json`). To refresh the record after
-enabling/disabling a plugin:
-
-```sh
-chezmoi re-add ~/Documents/Knowledge-Track/.obsidian/community-plugins.json \
-               ~/Documents/Knowledge-Track/.obsidian/core-plugins.json
-# then regenerate obsidian-plugins.lock.json (versions from local manifests, repos from the
-# obsidianmd/obsidian-releases community registry) and commit.
-```
 
 ## Template data
 
