@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.os "darwin" -}}
+{{   include "../install/macos/common/brew.sh" }}
+# Re-run when the Homebrew bundle manifest changes.
+# Brewfile hash: {{ include "dot_config/homebrew/Brewfile" | sha256sum }}
+{{- end }}

@@ -1,2 +1,5 @@
+# Make `brew bundle --global` (dump/cleanup/check) use the chezmoi-managed Brewfile.
+export HOMEBREW_BUNDLE_FILE_GLOBAL="$HOME/.config/homebrew/Brewfile"
+
 # Cargo env (only if the rust toolchain is installed via rustup)
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
