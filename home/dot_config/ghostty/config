@@ -2,6 +2,19 @@
 # cmux is Ghostty-based and honors the same config keys, so this file is
 # shared by both. Keep overrides minimal — rely on upstream defaults.
 #
+# ── Terminal stack decision (2026-06, FROZEN) ─────────────────────────
+# Daily driver : cmux — for its agent-aware sidebar / notifications / `cmux diff`.
+#                Embedded browser disabled in ~/.config/cmux/cmux.json; links
+#                open in the system browser. View an agent's last change with
+#                `cmux diff --last-turn` instead of opening an external tool.
+# Persistence  : tmux (not zellij), used SELECTIVELY for tasks that must survive
+#                detach / a front-end crash, and to attach from another device
+#                over ssh/mosh. See `tw` and `wt`/`wtrm` in ~/.zshrc.
+# FOMO gate    : do NOT switch terminals (Prowl / Otty / $next_shiny) unless it
+#                does something cmux OR tmux *structurally cannot*. UI/aesthetic
+#                upgrades do NOT count. cmux↔Prowl↔Otty are one category — churn
+#                only re-pays the integration tax. Read this before tinkering.
+#
 # Reference: ghostty +show-config --default --docs
 # Docs:      https://ghostty.org/docs/config
 
