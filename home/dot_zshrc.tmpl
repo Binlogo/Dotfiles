@@ -60,6 +60,13 @@ alias cm="chezmoi"
 # Claude Code: compact at 40% of 1M context; pair with model=opusplan + fastMode=true
 alias c='CLAUDE_CODE_AUTO_COMPACT_WINDOW=400000 claude --dangerously-skip-permissions'
 
+# Open the current dir in an external tool. While an agent holds the pane, open
+# a cmux split (cmd+d) and run one of these there. For an agent's last change,
+# `cmux diff --last-turn` is usually faster than leaving cmux at all.
+alias f='open -a Fork "$PWD"'   # Fork — git history / diff
+alias cur='cursor .'            # Cursor
+alias z='zed .'                 # Zed   (z is free; zoxide is bound to `j`)
+
 # --- Completions ------------------------------------------------------
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
@@ -108,6 +115,7 @@ function wt() {
   local ws
   ws=$(cmux new-workspace --name "${project}/${branch}" --cwd "$worktree_path" 2>&1 | awk '{print $2}')
   cmux select-workspace --workspace "$ws"
+  echo "wt: for detach/attach (mobile, crash-proof), run \`tw\` here → session: ${branch//[^a-zA-Z0-9_-]/-}"
 }
 
 # Remove current worktree, its branch, and close its cmux workspace
@@ -149,6 +157,22 @@ function wtrm() {
     git -C "$main_path" branch -d "$branch"
   fi
   cmux close-workspace --workspace "$ws"
+  # Tear down this worktree's tmux session too, if `tw` ever created one.
+  tmux kill-session -t "${branch//[^a-zA-Z0-9_-]/-}" 2>/dev/null
+}
+
+# Worktree tmux: start/attach a detachable session named after the current
+# branch, so a long or agent task can survive detach / a cmux crash and be
+# re-attached from another device:  mosh <host> -- tmux attach -t <name>
+# cmux stays the daily driver — reach for this only when a task must outlive the
+# front-end. `wt` prints the name on creation; `wtrm` cleans the session up.
+function _wt_tmux_name() {
+  local b; b=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return 1
+  printf '%s' "${b//[^a-zA-Z0-9_-]/-}"
+}
+function tw() {
+  local name; name=$(_wt_tmux_name) || { echo "tw: not in a git repo"; return 1; }
+  tmux new-session -A -s "$name"
 }
 
 # --- Local overrides (never committed) --------------------------------

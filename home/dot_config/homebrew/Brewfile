@@ -29,10 +29,12 @@ brew "git"
 brew "git-delta"
 brew "jq"
 brew "mise"
+brew "mosh"         # mobile-friendly ssh (survives roaming); attach to tmux from phone
 brew "neovim"
 brew "ripgrep"
 brew "sheldon"      # zsh plugin manager (replaces oh-my-zsh)
 brew "starship"
+brew "tmux"         # persistence layer under cmux; attach long/agent tasks anywhere
 brew "zoxide"       # smarter cd (replaces autojump)
 
 # ---------------------------------------------------------------------
@@ -89,7 +91,7 @@ cask "visual-studio-code"
 #   brew install --cask db-browser-for-sqlite
 #
 #   # Misc niceties
-#   brew install asciinema pv tmux tokei fswatch
+#   brew install asciinema pv tokei fswatch
 #
 #   # Mac App Store (needs `mas` + GUI sign-in; skip in headless bundle)
 #   brew install mas
