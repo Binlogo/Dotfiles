@@ -13,6 +13,10 @@ export PATH
 
 export PNPM_HOME="$HOME/Library/pnpm"
 
+# --- Environment & shell options --------------------------------------
+export EDITOR='nvim'           # default editor (git commit, etc.)
+setopt AUTO_CD                 # a bare directory path cd's into it
+
 # --- History ----------------------------------------------------------
 # Sane defaults oh-my-zsh used to set silently; now explicit (frameless zsh).
 HISTFILE="$HOME/.zsh_history"
