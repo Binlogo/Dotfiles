@@ -47,6 +47,15 @@ command -v direnv >/dev/null && eval "$(direnv hook zsh)"
 command -v zoxide >/dev/null && eval "$(zoxide init zsh --cmd j)"   # `j <dir>`, as autojump did
 command -v fzf    >/dev/null && source <(fzf --zsh)
 
+# --- App integrations -------------------------------------------------
+# GUI / dev-tool shell hooks and PATH entries, each existence-guarded so the
+# line is inert on machines where the tool isn't installed. Generic and
+# shareable, so they live here rather than in the private ~/.zshrc.local.
+[[ -f "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh"   # OrbStack
+[[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && source "$HOME/.config/kaku/zsh/kaku.zsh" # Kaku
+[[ -d "/Applications/Obsidian.app/Contents/MacOS" ]] && path+=("/Applications/Obsidian.app/Contents/MacOS")  # Obsidian CLI
+[[ -d "$HOME/.antigravity/antigravity/bin" ]] && path=("$HOME/.antigravity/antigravity/bin" $path)           # Antigravity (Google AI IDE)
+
 # --- Runtimes (mise) --------------------------------------------------
 command -v mise >/dev/null && eval "$(mise activate zsh)"
 
@@ -183,3 +192,11 @@ function tw() {
 # --- Local overrides (never committed) --------------------------------
 # Put machine-specific env, tokens, or work-only settings in ~/.zshrc.local
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# >>> otty shell integration >>>
+# Added by Otty — toggle in Settings > Shell > Shell Integration.
+# Inert unless launched by Otty (it sets $OTTY_SHELL_INTEGRATION).
+if [ -n "$OTTY_SHELL_INTEGRATION" ] && [ -r "$OTTY_SHELL_INTEGRATION/otty-integration.zsh" ]; then
+  . "$OTTY_SHELL_INTEGRATION/otty-integration.zsh"
+fi
+# <<< otty shell integration <<<
