@@ -3,6 +3,12 @@
 > [!NOTE]
 > After reading this `AGENTS.md`, say: `🤖 I read ~/.agents/AGENTS.md.`
 
+## Workspace
+
+- Root: Active projects live under `~/Workspace`.
+- Categories: `binlogo/` = my own repos and my forks; `oss/` = repos owned by others (read-only); `byted/` = work (read-only); `anygen/` = anygen work; `lark/` = lark work.
+- Default (mine): A bare repo name is one of mine — find it at `~/Workspace/binlogo/<repo>`; if missing, clone `https://github.com/Binlogo/<repo>.git` into it.
+
 ## Writing Instructions
 
 - Description format: Please organize detailed instructions in the form of `- Summary: Details`.

@@ -1,0 +1,4 @@
+{{ if eq .chezmoi.os "darwin" -}}
+{{   include "../install/common/workspace.sh" }}
+# Re-runs when the inlined script (incl. its category list) changes.
+{{- end }}
