@@ -52,7 +52,7 @@ command -v fzf    >/dev/null && source <(fzf --zsh)
 # line is inert on machines where the tool isn't installed. Generic and
 # shareable, so they live here rather than in the private ~/.zshrc.local.
 [[ -f "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh"   # OrbStack
-[[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && source "$HOME/.config/kaku/zsh/kaku.zsh" # Kaku
+[[ -f "$HOME/.config/kaku/zsh/kaku.zsh" ]] && source "$HOME/.config/kaku/zsh/kaku.zsh" # Kaku Shell Integration
 [[ -d "/Applications/Obsidian.app/Contents/MacOS" ]] && path+=("/Applications/Obsidian.app/Contents/MacOS")  # Obsidian CLI
 [[ -d "$HOME/.antigravity/antigravity/bin" ]] && path=("$HOME/.antigravity/antigravity/bin" $path)           # Antigravity (Google AI IDE)
 
@@ -200,3 +200,7 @@ if [ -n "$OTTY_SHELL_INTEGRATION" ] && [ -r "$OTTY_SHELL_INTEGRATION/otty-integr
   . "$OTTY_SHELL_INTEGRATION/otty-integration.zsh"
 fi
 # <<< otty shell integration <<<
+
+# Kaku appends this PATH line to ~/.zshrc itself (like Otty above); mirrored here
+# verbatim so chezmoi and Kaku agree instead of fighting over the file.
+[[ ":$PATH:" != *":$HOME/.config/kaku/zsh/bin:"* ]] && export PATH="$HOME/.config/kaku/zsh/bin:$PATH" # Kaku PATH Integration
