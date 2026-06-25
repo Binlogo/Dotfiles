@@ -1,0 +1,4 @@
+{{ if eq .chezmoi.os "darwin" -}}
+{{   include "../install/common/agent_skills.sh" }}
+# Re-runs when the inlined script (incl. its repo list) changes.
+{{- end }}
