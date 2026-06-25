@@ -25,10 +25,8 @@
 
 ### Worktree Policy
 
-- Default branch: When the current checkout is on `main` or the repository's default branch, treat files under repository management as read-only.
-- Prior confirmation: Before entering a task that may modify files under repository management, first check the current branch / worktree.
-- Before editing: If you are on `main` or the default branch, even if the worktree is clean, create a new task-specific `git worktree` or move into one before editing.
-- Investigation: Read-only investigation may remain on the current checkout.
-- Reuse conditions: You may reuse the current checkout for mutating work only when the user has explicitly asked you to work there, or when you are already in a non-default branch worktree dedicated to this task.
-- Local changes: If there are unrelated local changes, do not mix them into the task. Use a separate worktree and bring in only task-relevant files.
-- Priority: This rule takes precedence over the weaker default that only requires a separate worktree when the current checkout is dirty.
+- Default: Work in place on the current checkout and branch, `main` included. Don't create a `git worktree` or switch branches unless asked, or the repo's own AGENTS.md/CLAUDE.md requires it.
+- Reversibility guard: On any branch, never run irreversible git ops without an explicit request — `reset --hard`, `clean`, `restore`, `rm`, force-push, history rewrite, branch/worktree deletion. Commit and push only when asked.
+- When to isolate: Use a dedicated worktree/branch for parallel or background agents on the same repo, for PR-flow repos, or on request. Prefer the harness's built-in worktree isolation when available.
+- Ask when awkward: If the tree is dirty with unrelated changes, you're on an unexpected branch, or the repo's convention is unclear, surface it and ask — don't branch or mix changes unilaterally.
+- Unrelated changes: Never fold pre-existing local edits into your task.
