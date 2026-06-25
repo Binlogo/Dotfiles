@@ -9,6 +9,10 @@
 - Categories: `binlogo/` = my own repos and my forks; `oss/` = repos owned by others (read-only); `byted/` = work (read-only); `anygen/` = anygen work; `lark/` = lark work.
 - Default (mine): A bare repo name is one of mine — find it at `~/Workspace/binlogo/<repo>`; if missing, clone `https://github.com/Binlogo/<repo>.git` into it.
 
+## Managed Devices
+
+- `anygen-linux-cloud`: AnyGen's cloud Linux execution environment. This device uses the Dotfiles repo as its `chezmoi` source and participates in maintaining shared agent configuration, especially `~/.agents/AGENTS.md` and agent-skills. Keep Linux-compatible rules generic and reusable; keep host-specific secrets, credentials, and one-off overrides outside the public dotfiles repo.
+
 ## Writing Instructions
 
 - Description format: Please organize detailed instructions in the form of `- Summary: Details`.
