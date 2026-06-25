@@ -43,4 +43,6 @@
 - Default: Work in place on the current checkout and branch, `main` included. Don't create a `git worktree` or switch branches unless asked, or the repo's own AGENTS.md/CLAUDE.md requires it.
 - Reversibility guard: On any branch, never run irreversible git ops without an explicit request — `reset --hard`, `clean`, `restore`, `rm`, force-push, history rewrite, branch/worktree deletion. Commit and push only when asked.
 - When to isolate: Use a dedicated worktree/branch for parallel or background agents on the same repo, for PR-flow repos, or on request. Prefer the harness's built-in worktree isolation when available.
+- Location: Place hand-made worktrees at `~/Workspace/<category>/<repo>-worktrees/<branch>` — a single sibling dir per repo, mirroring the branch name (slashes allowed, e.g. `feat/foo`). Never scatter them as flat `<repo>-<ticket>` siblings or a shared top-level `worktrees/`.
+- Tool-managed worktrees: Worktrees created by external tools keep their own roots (e.g. `~/conductor/workspaces/<repo>/…`, `~/.codex/worktrees/…`) — leave them there; don't force them into the Workspace convention or relocate them.
 - Ask when awkward: If you're on an unexpected branch or the repo's convention is unclear, surface it and ask — don't switch branches unilaterally.
