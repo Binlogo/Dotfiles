@@ -20,6 +20,26 @@ fi
 # git from Homebrew, plus the standalone bin dir, in case PATH is not inherited.
 export PATH="/opt/homebrew/bin:${HOME}/.local/bin:${PATH}"
 
+# Put mise-managed node/npx on PATH so each repo's install.sh phase 2 (which runs
+# `npx skills …` to install consumed skills) works during bootstrap. Resolve the
+# real install bin by globbing the filesystem — NOT the mise shim — so we don't
+# depend on mise config-trust at apply time (the shim execs mise, which refuses
+# untrusted config). Prefer the `lts` alias dir, else any installed node version.
+node_bin=""
+if [ -x "${HOME}/.local/share/mise/installs/node/lts/bin/npx" ]; then
+    node_bin="${HOME}/.local/share/mise/installs/node/lts/bin"
+else
+    for d in "${HOME}/.local/share/mise/installs/node"/*/bin; do
+        if [ -x "${d}/npx" ]; then
+            node_bin="${d}"
+            break
+        fi
+    done
+fi
+if [ -n "${node_bin}" ]; then
+    export PATH="${node_bin}:${PATH}"
+fi
+
 # Repos to bootstrap, as "owner/repo". Add the private one when it exists:
 #   "Binlogo/agent-skills-private"
 readonly AGENT_SKILL_REPOS=(
