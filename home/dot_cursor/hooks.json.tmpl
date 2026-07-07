@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "./hooks/inject-agents-md.sh"
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": "if [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; fi",
+        "timeout": 10
+      }
+    ],
+    "stop": [
+      {
+        "command": "if [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; fi",
+        "timeout": 10
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "if [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; fi",
+        "timeout": 10
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "if [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; fi",
+        "timeout": 10
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "command": "if [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; fi",
+        "timeout": 10
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "if [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; fi",
+        "timeout": 10
+      }
+    ],
+    "beforeMCPExecution": [
+      {
+        "command": "if [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; fi",
+        "timeout": 10
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": "if [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; fi",
+        "timeout": 10
+      }
+    ]
+  }
+}
