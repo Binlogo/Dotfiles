@@ -28,7 +28,9 @@ brew "gh"
 brew "git"
 brew "git-delta"
 brew "jq"
-brew "mise"
+# mise is installed natively (https://mise.run), NOT via Homebrew — jdx bakes
+# binary optimizations into the release builds that Homebrew's build can't
+# reproduce, and native builds keep `mise self-update`. See install/common/mise.sh.
 brew "mosh"         # mobile-friendly ssh (survives roaming); attach to tmux from phone
 brew "neovim"
 brew "ripgrep"

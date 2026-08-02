@@ -39,12 +39,14 @@ Thin chezmoi wrappers in `home/.chezmoiscripts/` pull each body in with
 | Wrapper (`home/.chezmoiscripts/…`) | Includes | Does | Re-runs on |
 | --- | --- | --- | --- |
 | `macos/run_onchange_before_10-install-packages-darwin.sh.tmpl` | `install/macos/common/brew.sh` | `brew bundle` | the embedded Brewfile |
-| `common/run_onchange_after_20-install-runtimes.sh.tmpl` | `install/common/mise.sh` | `mise install` | `dot_config/mise/config.toml` |
+| `common/run_onchange_after_20-install-runtimes.sh.tmpl` | `install/common/mise.sh` | install `mise` (native) + `mise install` | `dot_config/mise/config.toml` |
 | `common/run_onchange_after_25-install-zsh-plugins.sh.tmpl` | `install/common/sheldon.sh` | `sheldon lock` (clone zsh plugins) | `dot_config/sheldon/plugins.toml` |
 | `common/run_onchange_after_40-install-plugins.sh.tmpl` | `install/common/claude_plugins.sh` | install Claude Code plugins | `dot_claude/settings.json` |
 
-`before_` runs ahead of file apply (Homebrew installs `mise`, `sheldon`, `jq`);
-the `after_` steps run once those binaries exist.
+`before_` runs ahead of file apply (Homebrew installs `sheldon`, `jq`); the
+`after_` steps run once those binaries exist. The runtimes step is self-bootstrapping:
+it installs `mise` from its native installer (see `install/common/mise.sh`) before
+pinning the runtimes, so it no longer depends on Homebrew.
 
 ## Plugins workflow
 
@@ -69,5 +71,5 @@ Real user identity and any secrets live in `~/.config/chezmoi/chezmoi.toml` and 
 ## Philosophy
 
 - Language runtimes (node / ruby / python / go / java) are managed by **mise**, declared in `dot_config/mise/config.toml`.
-- `brew` installs tooling; `mise` installs interpreters. No overlap.
+- `brew` installs tooling; `mise` installs interpreters. No overlap. `mise` itself is installed from its native installer ([mise.run](https://mise.run)), **not** Homebrew — jdx bakes binary optimizations into the release builds that Homebrew's build can't reproduce, and native builds keep `mise self-update`.
 - The shell is **frameless zsh** — no oh-my-zsh. **sheldon** (a brew-installed plugin manager) loads plugins from `dot_config/sheldon/plugins.toml`; the prompt is **starship**. Tool hooks (direnv, zoxide, fzf, mise) are plain one-liners in `dot_zshrc.tmpl`.
