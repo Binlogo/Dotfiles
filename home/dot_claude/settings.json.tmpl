@@ -1,0 +1,294 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "skillOverrides": {
+    "animation-vocabulary": "off",
+    "apple-app-design-guidelines": "off",
+    "apple-design": "off",
+    "ast-grep": "off",
+    "calm-dense-design": "off",
+    "check": "off",
+    "cmux": "off",
+    "cmux-customization": "off",
+    "cmux-diagnostics": "off",
+    "cmux-keyboard-shortcuts": "off",
+    "cmux-markdown": "off",
+    "cmux-settings": "off",
+    "cmux-workspace": "off",
+    "codebase-design": "off",
+    "design": "off",
+    "diagnosing-bugs": "off",
+    "domain-modeling": "off",
+    "ego-browser": "off",
+    "find-animation-opportunities": "off",
+    "find-skills": "off",
+    "garyx-inspector": "off",
+    "health": "off",
+    "hunt": "off",
+    "implement": "off",
+    "improve-animations": "off",
+    "improve-codebase-architecture": "off",
+    "json-canvas": "off",
+    "lark-approval": "off",
+    "lark-apps": "off",
+    "lark-attendance": "off",
+    "lark-base": "off",
+    "lark-calendar": "off",
+    "lark-contact": "off",
+    "lark-event": "off",
+    "lark-mail": "off",
+    "lark-markdown": "off",
+    "lark-minutes": "off",
+    "lark-note": "off",
+    "lark-okr": "off",
+    "lark-openapi-explorer": "off",
+    "lark-shared": "off",
+    "lark-sheets": "off",
+    "lark-skill-maker": "off",
+    "lark-slides": "off",
+    "lark-task": "off",
+    "lark-vc": "off",
+    "lark-vc-agent": "off",
+    "lark-whiteboard": "off",
+    "lark-whiteboard-cli": "off",
+    "lark-workflow-meeting-summary": "off",
+    "lark-workflow-standup-report": "off",
+    "learn": "off",
+    "obsidian-bases": "off",
+    "obsidian-cli": "off",
+    "obsidian-markdown": "off",
+    "orca-cli": "off",
+    "ponytail-audit": "off",
+    "ponytail-debt": "off",
+    "ponytail-gain": "off",
+    "ponytail-help": "off",
+    "prototype": "off",
+    "read": "off",
+    "research": "off",
+    "review-animations": "off",
+    "setup-matt-pocock-skills": "off",
+    "spm-build-analysis": "off",
+    "tdd": "off",
+    "teach": "off",
+    "think": "off",
+    "tidy-up-workspace": "off",
+    "to-issues": "off",
+    "to-prd": "off",
+    "to-spec": "off",
+    "to-tickets": "off",
+    "triage": "off",
+    "wayfinder": "off",
+    "write": "off",
+    "xcode-build-benchmark": "off",
+    "xcode-build-fixer": "off",
+    "xcode-compilation-analyzer": "off",
+    "xcode-project-analyzer": "off"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cargo-agents hook claude post-tool-use"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cargo-agents hook claude pre-tool-use"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cargo-agents hook claude session-start"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cargo-agents hook claude user-prompt-submit"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c 'plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"$HOME/.local/share/mise/shims/bun\" --env-file /dev/null \"${plugin_dir}src/index.ts\"'"
+  },
+  "enabledPlugins": {
+    "clangd-lsp@claude-plugins-official": false,
+    "claude-hud@claude-hud": true,
+    "claude-md-management@claude-plugins-official": false,
+    "compound-engineering@compound-engineering-plugin": true,
+    "figma@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": false,
+    "swift-lsp@claude-plugins-official": false,
+    "codex@openai-codex": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    },
+    "compound-engineering-plugin": {
+      "source": {
+        "source": "github",
+        "repo": "EveryInc/compound-engineering-plugin"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "fastMode": true,
+  "showClearContextOnPlanAccept": true,
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true
+}

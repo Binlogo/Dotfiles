@@ -1,5 +1,5 @@
 {{ if eq .chezmoi.os "darwin" -}}
 {{   include "../install/common/claude_plugins.sh" }}
 # Re-run when the declared plugins/marketplaces change.
-# settings hash: {{ include "dot_claude/settings.json" | sha256sum }}
+# settings hash: {{ include "dot_claude/settings.json.tmpl" | sha256sum }}
 {{- end }}
