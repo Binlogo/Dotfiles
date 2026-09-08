@@ -8,49 +8,49 @@
     ],
     "beforeSubmitPrompt": [
       {
-        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then ORCA_CURSOR_HOOK_RESPONSE='{\"continue\":true}' /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else printf '%s\\n' '{\"continue\":true}'; { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
         "timeout": 10
       }
     ],
     "stop": [
       {
-        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then ORCA_CURSOR_HOOK_RESPONSE='{}' /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else printf '%s\\n' '{}'; { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
         "timeout": 10
       }
     ],
     "preToolUse": [
       {
-        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then ORCA_CURSOR_HOOK_RESPONSE='{\"permission\":\"allow\"}' /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else printf '%s\\n' '{\"permission\":\"allow\"}'; { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
         "timeout": 10
       }
     ],
     "postToolUse": [
       {
-        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then ORCA_CURSOR_HOOK_RESPONSE='{}' /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else printf '%s\\n' '{}'; { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
         "timeout": 10
       }
     ],
     "postToolUseFailure": [
       {
-        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then ORCA_CURSOR_HOOK_RESPONSE='{}' /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else printf '%s\\n' '{}'; { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
         "timeout": 10
       }
     ],
     "beforeShellExecution": [
       {
-        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then ORCA_CURSOR_HOOK_RESPONSE='{\"permission\":\"allow\"}' /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else printf '%s\\n' '{\"permission\":\"allow\"}'; { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
         "timeout": 10
       }
     ],
     "beforeMCPExecution": [
       {
-        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then ORCA_CURSOR_HOOK_RESPONSE='{\"permission\":\"allow\"}' /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else printf '%s\\n' '{\"permission\":\"allow\"}'; { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
         "timeout": 10
       }
     ],
     "afterAgentResponse": [
       {
-        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "command": "if [ -f '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -r '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ] && [ -x '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh' ]; then ORCA_CURSOR_HOOK_RESPONSE='{}' /bin/sh '{{ .chezmoi.homeDir }}/.orca/agent-hooks/cursor-hook.sh'; else printf '%s\\n' '{}'; { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
         "timeout": 10
       }
     ]
