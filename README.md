@@ -21,8 +21,8 @@ root holds project plumbing (this README, `chezmoi.toml.example`) and the
 
 - `dot_zshrc.tmpl` / `dot_zprofile` / `dot_zshenv` — zsh configuration
 - `dot_gitconfig.tmpl` — git user info is templated
-- `private_dot_ssh/config.tmpl` — ssh config (work-only blocks gated on `.work`)
-- `dot_config/` — application configs (mise, sheldon, starship, nvim, helix, alacritty, kitty, btop, zellij, karabiner)
+- `private_dot_ssh/config.tmpl` — ssh config with machine-specific hosts in `~/.ssh/config.d/*.conf`
+- `dot_config/` — application configs (mise, sheldon, starship, nvim, helix, ghostty, tmux, btop, cmux, karabiner)
 - `dot_config/sheldon/plugins.toml` — zsh plugins (autosuggestions, syntax highlighting, OMZ git aliases)
 
 ### Provisioning scripts
@@ -38,19 +38,21 @@ Thin chezmoi wrappers in `home/.chezmoiscripts/` pull each body in with
 
 | Wrapper (`home/.chezmoiscripts/…`) | Includes | Does | Re-runs on |
 | --- | --- | --- | --- |
-| `macos/run_onchange_before_10-install-packages-darwin.sh.tmpl` | `install/macos/common/brew.sh` | `brew bundle` | the embedded Brewfile |
+| `common/run_onchange_after_10-install-packages-darwin.sh.tmpl` | `install/macos/common/brew.sh` | `brew bundle --no-upgrade` | the embedded Brewfile |
 | `common/run_onchange_after_20-install-runtimes.sh.tmpl` | `install/common/mise.sh` | install `mise` (native) + `mise install` | `dot_config/mise/config.toml` |
-| `common/run_onchange_after_25-install-zsh-plugins.sh.tmpl` | `install/common/sheldon.sh` | `sheldon lock` (clone zsh plugins) | `dot_config/sheldon/plugins.toml` |
-| `common/run_onchange_after_40-install-plugins.sh.tmpl` | `install/common/claude_plugins.sh` | install Claude Code plugins | `dot_claude/settings.json` |
+| `common/run_onchange_after_25-install-zsh-plugins.sh.tmpl` | `install/common/sheldon.sh` | `sheldon lock --update` (clone/update zsh plugins) | `dot_config/sheldon/plugins.toml` |
+| `common/run_onchange_after_30-create-workspace.sh.tmpl` | `install/common/workspace.sh` | create `~/Workspace/{binlogo,oss,byted,anygen,lark}` | the script |
+| `common/run_onchange_after_40-install-plugins.sh.tmpl` | `install/common/claude_plugins.sh` | install Claude Code plugins | `dot_claude/settings.json.tmpl` |
+| `common/run_onchange_after_50-link-agent-skills.sh.tmpl` | `install/common/agent_skills.sh` | clone agent-skills if missing and run its installer | the script |
 
-`before_` runs ahead of file apply (Homebrew installs `sheldon`, `jq`); the
-`after_` steps run once those binaries exist. The runtimes step is self-bootstrapping:
+All wrappers run after file apply, in numeric order. Homebrew installs `sheldon`
+and `jq` at step 10 before later steps use them. The runtimes step is self-bootstrapping:
 it installs `mise` from its native installer (see `install/common/mise.sh`) before
 pinning the runtimes, so it no longer depends on Homebrew.
 
 ## Plugins workflow
 
-Claude Code plugins are declared in `dot_claude/settings.json` (`enabledPlugins` +
+Claude Code plugins are declared in `dot_claude/settings.json.tmpl` (`enabledPlugins` +
 `extraKnownMarketplaces`). Because `enabledPlugins` only *toggles* a plugin and never
 downloads it, the `after_40` plugins wrapper (→ `install/common/claude_plugins.sh`)
 registers each declared marketplace and installs each enabled plugin on a fresh
@@ -61,7 +63,7 @@ claude plugin marketplace add <owner/repo>          # e.g. jarrodwatts/claude-hu
 claude plugin install <plugin>@<marketplace> --scope user
 ```
 
-Then mirror the marketplace + plugin into `dot_claude/settings.json` and commit. Both CLI
+Then mirror the marketplace + plugin into `dot_claude/settings.json.tmpl` and commit. Both CLI
 calls are idempotent, so the run_onchange script is safe to replay.
 
 ## Template data

@@ -1,5 +1,5 @@
 [tools]
-node = "24"
+node = "24.15.0"
 ruby = "3.4"
 python = "3.14"
 java = "temurin-17"
@@ -7,9 +7,7 @@ go = "latest"
 git-lfs = "latest"
 # Upgrade via `mise use -g bun@latest` — `bun upgrade` bypasses mise.
 bun = "latest"
-# Pinned: mise resolves `latest` from mise-versions.jdx.dev, whose codex index
-# stalled at 0.153.0-alpha.2 (2026-09-01). Back to "latest" once it catches up.
-codex = "0.153.4"
+codex = "latest"
 
 [settings]
 auto_update = true
