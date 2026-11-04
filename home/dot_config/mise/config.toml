@@ -7,7 +7,6 @@ go = "latest"
 git-lfs = "latest"
 # Upgrade via `mise use -g bun@latest` — `bun upgrade` bypasses mise.
 bun = "latest"
-codex = "latest"
 
 [settings]
 auto_update = true
